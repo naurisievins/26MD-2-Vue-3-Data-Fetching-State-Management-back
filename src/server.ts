@@ -21,41 +21,25 @@ app.get("/get-jokes", (req: Request, res: Response) => {
 
 // Add new joke
 app.post("/post-joke", (req: Request, res: Response) => {
-  const { name, type } = req.body;
-
-  const jokeObject = {
-    category: "Programming",
-    flags: {
-      explicit: false,
-      nsfw: false,
-      political: false,
-      racist: false,
-      religious: false,
-      sexist: false,
-    },
-    id: 18,
-    joke: '"Honey, go to the store and buy some eggs."\n"OK."\n"Oh and while you\'re there, get some milk."\nHe never returned.',
-    lang: "en",
-    safe: true,
-    type: "single",
-  };
-
+  const jokeObject = req.body.joke;
   const joke = new Joke(jokeObject);
 
-  joke.save().then((data) => res.status(200).json(data));
+  joke.save().then((data) => {
+    res.status(200).json(data);
+  });
 });
 
 // Delete joke
-app.delete("/jokes/:id", (req, res) => {
+app.delete("/delete-joke/:id", (req, res) => {
   const id = req.params.id;
 
-  Joke.findByIdAndDelete(id)
+  Joke.findOneAndDelete({ id: Number(id) })
     .then(() => {
-      res.status(200).json(`Task with ID ${id} deleted successfully`);
+      res.status(200).json(`Joke with ID ${id} deleted successfully`);
     })
     .catch((error) => {
       console.log(error);
-      return res.status(500).json("Error deleting task!");
+      return res.status(500).json("Error deleting joke!");
     });
 });
 
