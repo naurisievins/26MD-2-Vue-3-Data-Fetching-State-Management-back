@@ -1,6 +1,4 @@
-# MD24-1-Angular-Forms-and-HTTP-back
-
-### Simple animal application where you can add animals
+# Simple Vue joke application
 
 Run `npm install` and then `npm run start:nodemon`
 
@@ -20,3 +18,5 @@ DB_PASSWORD=password
 ```
 
 where DB_USERNAME and DB_PASSWORD are your monogDB credentials.
+
+Run frontend: https://github.com/naurisievins/26MD-1-Vue-3-Data-Fetching-State-Management-front
